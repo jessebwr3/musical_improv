@@ -43,7 +43,6 @@ export function Welcome() {
                 transition={{ type: 'spring', bounce: 0.4 }}
                 whileHover="hover"
                 whileTap="tap"
-                whileFocus="hover"
               />
             </Link>
           );
