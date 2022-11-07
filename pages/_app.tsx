@@ -11,9 +11,12 @@ import {
   Header,
   Group,
   Global,
+  Stack,
 } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
+import { FacebookIcon, InstagramIcon } from '../components/Icons/socialMediaIcons';
+import { AppHeader } from '../components/header';
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
   const { Component, pageProps } = props;
@@ -50,28 +53,7 @@ export default function App(props: AppProps & { colorScheme: ColorScheme }) {
                 },
               })}
             />
-            <AppShell
-              padding="md"
-              header={
-                <Header
-                  sx={(theme) => ({
-                    backgroundColor:
-                      theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.pink[2],
-                    color:
-                      theme.colorScheme === 'dark' ? theme.colors.pink[2] : theme.colors.dark[7],
-                  })}
-                  className="moon-header"
-                  height={65}
-                  p="xs"
-                >
-                  <Group position="apart">
-                    <div>Oh yeah...</div>
-                    <Link href="/">MUSICAL IMPROV</Link>
-                    <ColorSchemeToggle />
-                  </Group>
-                </Header>
-              }
-            >
+            <AppShell padding="md" header={<AppHeader />}>
               <Component {...pageProps} />
             </AppShell>
           </NotificationsProvider>
