@@ -19,7 +19,7 @@ type App = {
 export type OneItemTeammate = OneItem<Teammate, QueryOne<Teammate>, false>;
 export type Teammates = OneItemTeammate[] | null | undefined;
 
-const rootUrl = 'https://3fjxwboo.directus.app';
+const rootUrl = 'https://musical-improv-nyc.fly.dev';
 
 const directus = new Directus<App>(rootUrl);
 
