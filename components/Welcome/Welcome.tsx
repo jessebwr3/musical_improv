@@ -2,7 +2,7 @@ import { Title, Text, Group } from '@mantine/core';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import useStyles from './Welcome.styles';
-import data from '../../json/whoAreWe.json';
+import { getAssetUrl, Teammates } from '../../cms/directus';
 
 const variants = {
   initial: {
@@ -16,27 +16,27 @@ const variants = {
   },
 };
 
-const { people } = data;
-
 const LEFT_MAX = -60;
 const RIGHT_MAX = 60;
 const TOTAL_ARC = RIGHT_MAX - LEFT_MAX;
-const EACH_PERSON_ARC = TOTAL_ARC / (people.length - 1);
 
-export function Welcome() {
+export function Welcome({ teammates }: { teammates: Teammates }) {
   const { classes } = useStyles();
+
+  const length = teammates?.length ?? 0;
+  const EACH_PERSON_ARC = TOTAL_ARC / (length - 1);
 
   return (
     <>
       <Group className={classes.group}>
-        {people.map((person, i) => {
+        {teammates?.map((teammate, i) => {
           const rotate = i * EACH_PERSON_ARC + LEFT_MAX;
           const transX = (i * EACH_PERSON_ARC + LEFT_MAX) * 0.5;
           return (
-            <Link href={`/who-are-we/${person.name}`} passHref>
+            <Link href={`/who-are-we/${teammate?.id}`} passHref>
               <motion.img
-                src={person.src}
-                key={person.src}
+                src={getAssetUrl(teammate?.primary_image)}
+                key={teammate?.id}
                 variants={variants}
                 className={classes.person}
                 initial={{ rotate, translateX: transX }}
