@@ -18,8 +18,12 @@ const ShowRow = ({ show }: { show: OneItemShow }) => {
           <Title order={6}>{datetime.format('hh:mm A')}</Title>
         </Stack>
       </Grid.Col>
-      <Grid.Col id={`${show?.id}`} span={9}>
+      <Grid.Col id={`${show?.id}`} span={7}>
+        <Title order={4}>{show?.title}</Title>
         <Text dangerouslySetInnerHTML={{ __html: show?.description ?? '' }} />
+      </Grid.Col>
+      <Grid.Col span={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Title order={6}>{show?.location}</Title>
       </Grid.Col>
     </>
   );
