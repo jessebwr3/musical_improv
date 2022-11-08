@@ -24,6 +24,7 @@ const ShowRow = ({ show }: { show: OneItemShow }) => {
           <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
             <Title order={6}>{datetime.format('MMM')}</Title>
           </MediaQuery>
+          <Text>{datetime.format('YYYY')}</Text>
           <Text>{datetime.format('hh:mm A')}</Text>
         </Stack>
       </Grid.Col>
