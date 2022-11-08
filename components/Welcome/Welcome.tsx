@@ -2,7 +2,8 @@ import { Title, Text, Group } from '@mantine/core';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import useStyles from './Welcome.styles';
-import { getAssetUrl, Teammates } from '../../cms/directus';
+import { getAssetUrl, Shows, Teammates } from '../../cms/directus';
+import ShowList from '../showList';
 
 const variants = {
   initial: {
@@ -20,7 +21,13 @@ const LEFT_MAX = -60;
 const RIGHT_MAX = 60;
 const TOTAL_ARC = RIGHT_MAX - LEFT_MAX;
 
-export function Welcome({ teammates }: { teammates: Teammates }) {
+export function Welcome({
+  teammates,
+  upcomingShows,
+}: {
+  teammates: Teammates;
+  upcomingShows: Shows;
+}) {
   const { classes } = useStyles();
 
   const length = teammates?.length ?? 0;
@@ -64,9 +71,7 @@ export function Welcome({ teammates }: { teammates: Teammates }) {
           UPCOMING SHOWS
         </Text>
       </Title>
-      <Text color="dimmed" align="center" size="lg" sx={{ maxWidth: 580 }} mx="auto" mt="xl">
-        NONE RIGHT NOW?
-      </Text>
+      <ShowList shows={upcomingShows} />
     </>
   );
 }

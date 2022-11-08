@@ -29,8 +29,12 @@ const AppMenu = () => {
         })}
       >
         <Menu.Item icon={<IconUsers size={14} />}>Who are we?</Menu.Item>
-        <Menu.Item icon={<IconMusic size={14} />}>Upcoming Shows</Menu.Item>
-        <Menu.Item icon={<IconCornerDownLeftDouble size={14} />}>Previous Shows</Menu.Item>
+        <Link href="/upcoming-shows" passHref>
+          <Menu.Item icon={<IconMusic size={14} />}>Upcoming Shows</Menu.Item>
+        </Link>
+        <Link href="/previous-shows" passHref>
+          <Menu.Item icon={<IconCornerDownLeftDouble size={14} />}>Previous Shows</Menu.Item>
+        </Link>
         <Menu.Item icon={<IconAddressBook size={14} />}>Contact Us!</Menu.Item>
       </Menu.Dropdown>
     </Menu>

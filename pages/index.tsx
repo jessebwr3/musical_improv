@@ -1,16 +1,23 @@
 import { Welcome } from '../components/Welcome/Welcome';
-import { getTeammates, Teammates } from '../cms/directus';
+import { getFutureShows, getTeammates, Shows, Teammates } from '../cms/directus';
 
 // This gets called on every request
 export async function getServerSideProps() {
   const teammates = await getTeammates();
+  const upcomingShows = await getFutureShows();
   // Pass data to the page via props
-  return { props: { teammates } };
+  return { props: { teammates, upcomingShows } };
 }
-export default function HomePage({ teammates }: { teammates: Teammates }) {
+export default function HomePage({
+  teammates,
+  upcomingShows,
+}: {
+  teammates: Teammates;
+  upcomingShows: Shows;
+}) {
   return (
     <>
-      <Welcome teammates={teammates} />
+      <Welcome teammates={teammates} upcomingShows={upcomingShows} />
     </>
   );
 }

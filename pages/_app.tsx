@@ -1,21 +1,9 @@
 import { useState } from 'react';
 import NextApp, { AppProps, AppContext } from 'next/app';
 import { getCookie, setCookie } from 'cookies-next';
-import Link from 'next/link';
 import Head from 'next/head';
-import {
-  MantineProvider,
-  ColorScheme,
-  ColorSchemeProvider,
-  AppShell,
-  Header,
-  Group,
-  Global,
-  Stack,
-} from '@mantine/core';
+import { MantineProvider, ColorScheme, ColorSchemeProvider, AppShell, Global } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import { FacebookIcon, InstagramIcon } from '../components/Icons/socialMediaIcons';
 import { AppHeader } from '../components/header';
 
 export default function App(props: AppProps & { colorScheme: ColorScheme }) {
