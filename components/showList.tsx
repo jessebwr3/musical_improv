@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Grid, Title, Stack, Text, Divider } from '@mantine/core';
+import { Grid, Title, Stack, Text, MediaQuery } from '@mantine/core';
 import { Shows, OneItemShow } from '../cms/directus';
 
 const ShowRow = ({ show }: { show: OneItemShow }) => {
@@ -9,40 +9,53 @@ const ShowRow = ({ show }: { show: OneItemShow }) => {
     <>
       <Grid.Col
         id={`${show?.id}`}
-        span={3}
-        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        span={2}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          borderBottom: '1px solid',
+        }}
       >
         <Stack style={{ gap: 0 }}>
           <Title order={1}>{datetime.date()}</Title>
-          <Title order={4}>{datetime.format('MMMM')}</Title>
-          <Title order={6}>{datetime.format('hh:mm A')}</Title>
+          <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+            <Title order={6}>{datetime.format('MMMM')}</Title>
+          </MediaQuery>
+          <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+            <Title order={6}>{datetime.format('MMM')}</Title>
+          </MediaQuery>
+          <Text>{datetime.format('hh:mm A')}</Text>
         </Stack>
       </Grid.Col>
-      <Grid.Col id={`${show?.id}`} span={7}>
+      <Grid.Col id={`${show?.id}`} span={8} sx={{ borderBottom: '1px solid' }}>
         <Title order={4}>{show?.title}</Title>
         <Text dangerouslySetInnerHTML={{ __html: show?.description ?? '' }} />
       </Grid.Col>
-      <Grid.Col span={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Title order={6}>{show?.location}</Title>
+      <Grid.Col
+        span={2}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderBottom: '1px solid',
+        }}
+      >
+        <Title order={6}>
+          <a href={`https://www.google.com/maps/search/${show?.location}`}>{show?.location}</a>
+        </Title>
       </Grid.Col>
     </>
   );
 };
 
-const ShowList = ({ shows }: { shows: Shows }) => {
-  console.log('moo');
-  return (
-    <Text sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Grid sx={{ maxWidth: 1100, width: '100%' }}>
-        {shows?.map((show) => (
-          <>
-            <ShowRow show={show} />
-            <Divider my="sm" />
-          </>
-        ))}
-      </Grid>
-    </Text>
-  );
-};
+const ShowList = ({ shows }: { shows: Shows }) => (
+  <Text sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Grid sx={{ maxWidth: 1100, width: '100%' }}>
+      {shows?.map((show) => (
+        <ShowRow show={show} />
+      ))}
+    </Grid>
+  </Text>
+);
 
 export default ShowList;

@@ -3,6 +3,7 @@ import { Directus, Item, OneItem, QueryOne } from '@directus/sdk';
 // Map your collection structure based on its fields.
 type Teammate = {
   id: string;
+  name: string;
   sort: number;
   my_story: string;
   primary_image: string;
